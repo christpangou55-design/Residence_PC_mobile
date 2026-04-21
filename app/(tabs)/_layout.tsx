@@ -1,57 +1,71 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
-
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import { Tabs, Link } from 'expo-router';
+import { Home, Search, Briefcase, User, Bell } from 'lucide-react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
+        tabBarActiveTintColor: '#0056A4',
+        tabBarInactiveTintColor: '#94a3b8',
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: '#0056A4',
+          height: 100,
+        },
+        headerTitle: () => (
+          <View className="flex-row items-center">
+            <Text className="text-white text-xl font-bold tracking-tighter">Résidence PC</Text>
+          </View>
+        ),
+        headerRight: () => (
+          <Link href="/notifications" asChild>
+            <TouchableOpacity className="mr-6">
+              <Bell size={22} color="white" />
+            </TouchableOpacity>
+          </Link>
+        ),
+        tabBarStyle: {
+            borderTopWidth: 1,
+            borderTopColor: '#f1f5f9',
+            paddingTop: 5,
+            height: 65,
+            backgroundColor: '#ffffff',
+        },
+        tabBarLabelStyle: {
+            fontSize: 10,
+            fontWeight: '600',
+            marginBottom: 5,
+        }
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+          headerShown: false,
+          title: 'Accueil',
+          tabBarIcon: ({ color }) => <Home size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="recherche"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Recherche',
+          tabBarIcon: ({ color }) => <Search size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="reservations"
+        options={{
+          title: 'Réservations',
+          tabBarIcon: ({ color }) => <Briefcase size={22} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profil',
+          tabBarIcon: ({ color }) => <User size={24} color={color} />,
         }}
       />
     </Tabs>
