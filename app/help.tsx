@@ -12,8 +12,8 @@ export default function HelpScreen() {
           headerTitle: 'Assistance',
           headerTitleStyle: { fontWeight: '900', fontSize: 18 },
           headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerTintColor: '#0056A4',
+          headerBackVisible: false,
+          headerTintColor: '#0001bc',
         }} 
       />
       <ScrollView className="flex-1 px-6 pt-4">
@@ -37,9 +37,9 @@ export default function HelpScreen() {
 
         <Text className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-4 mt-8">Nous Contacter</Text>
         <View className="flex-row space-x-4 mb-12">
-            <ContactCard icon={<MessageSquare size={24} color="#0056A4" />} label="Chat live" />
-            <ContactCard icon={<Phone size={24} color="#0056A4" />} label="Appel" />
-            <ContactCard icon={<Mail size={24} color="#0056A4" />} label="Email" />
+            <ContactCard icon={<MessageSquare size={24} color="#0001bc" />} label="Chat live" />
+            <ContactCard icon={<Phone size={24} color="#0001bc" />} label="Appel" />
+            <ContactCard icon={<Mail size={24} color="#0001bc" />} label="Email" />
         </View>
 
         <TouchableOpacity className="bg-primary p-6 rounded-[30px] flex-row items-center justify-between shadow-xl shadow-primary/20 mb-12">

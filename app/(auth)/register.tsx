@@ -44,7 +44,7 @@ export default function RegisterScreen() {
         router.replace('/(tabs)/profile');
       }
     } catch (err: any) {
-      console.error(err);
+      console.error('Registration error:', err);
       // Gérer les erreurs de validation Laravel
       const errors = err.response?.data?.errors;
       let message = err.response?.data?.message || "Erreur lors de l'inscription.";

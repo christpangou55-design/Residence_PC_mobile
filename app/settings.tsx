@@ -24,51 +24,51 @@ export default function SettingsScreen() {
           headerTitle: 'Paramètres',
           headerTitleStyle: { fontWeight: '900', fontSize: 18 },
           headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerTintColor: '#0056A4',
+          headerBackVisible: false,
+          headerTintColor: '#0001bc',
         }} 
       />
       <ScrollView className="flex-1 px-6 pt-4" showsVerticalScrollIndicator={false}>
         <Text className="text-3xl font-black tracking-tighter text-slate-900 mb-8">Compte</Text>
 
         <Section title="Profil & Sécurité">
-            <SettingItem icon={<User size={18} color="#0056A4" />} title="Informations Personnelles" />
-            <SettingItem icon={<Lock size={18} color="#0056A4" />} title="Mot de passe" />
-            <SettingItem icon={<Shield size={18} color="#0056A4" />} title="Confidentialité" />
+            <SettingItem icon={<User size={18} color="#0001bc" />} title="Informations Personnelles" />
+            <SettingItem icon={<Lock size={18} color="#0001bc" />} title="Mot de passe" />
+            <SettingItem icon={<Shield size={18} color="#0001bc" />} title="Confidentialité" />
         </Section>
 
         <Section title="Préférences">
             <View className="flex-row items-center justify-between py-5 border-b border-slate-50">
                 <View className="flex-row items-center">
                     <View className="bg-slate-50 p-2 rounded-xl">
-                        <Bell size={18} color="#0056A4" />
+                        <Bell size={18} color="#0001bc" />
                     </View>
                     <Text className="ml-4 text-sm font-bold text-slate-900">Notifications Push</Text>
                 </View>
                 <Switch 
                     value={notifications} 
                     onValueChange={setNotifications}
-                    trackColor={{ false: '#f1f5f9', true: '#0056A4' }}
+                    trackColor={{ false: '#f1f5f9', true: '#0001bc' }}
                 />
             </View>
             <View className="flex-row items-center justify-between py-5 border-b border-slate-50">
                 <View className="flex-row items-center">
                     <View className="bg-slate-50 p-2 rounded-xl">
-                        <Lock size={18} color="#0056A4" />
+                        <Lock size={18} color="#0001bc" />
                     </View>
                     <Text className="ml-4 text-sm font-bold text-slate-900">Face ID / Touch ID</Text>
                 </View>
                 <Switch 
                     value={biometrics} 
                     onValueChange={setBiometrics}
-                    trackColor={{ false: '#f1f5f9', true: '#0056A4' }}
+                    trackColor={{ false: '#f1f5f9', true: '#0001bc' }}
                 />
             </View>
-            <SettingItem icon={<Globe size={18} color="#0056A4" />} title="Langue & Région" value="Français (FR)" />
+            <SettingItem icon={<Globe size={18} color="#0001bc" />} title="Langue & Région" value="Français (FR)" />
         </Section>
 
         <Section title="Paiement">
-            <SettingItem icon={<CreditCard size={18} color="#0056A4" />} title="Modes de paiement" />
+            <SettingItem icon={<CreditCard size={18} color="#0001bc" />} title="Modes de paiement" />
         </Section>
 
         <View className="mt-8 mb-20 space-y-4">

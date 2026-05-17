@@ -6,13 +6,21 @@ import { useRouter } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import api from '@/api/api';
 
+/**
+ * Écran de Connexion (Mobile).
+ * Gère l'authentification et stocke le token de session.
+ */
 export default function LoginScreen() {
   const router = useRouter();
+  // États pour les champs du formulaire
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  /**
+   * Envoie la requête de connexion au serveur.
+   */
   const handleLogin = async () => {
     if (!email || !password) {
       Alert.alert('Erreur', 'Veuillez remplir tous les champs.');
@@ -21,17 +29,25 @@ export default function LoginScreen() {
 
     setLoading(true);
     try {
+      // Appel à l'API Laravel
       const res = await api.post('/auth/login', { email, password });
       const token = res.data.token;
       
       if (token) {
+        // Stockage sécurisé du token pour les prochaines requêtes
         await SecureStore.setItemAsync('token', token);
         Alert.alert('Succès', 'Connexion réussie !');
+        // Redirection vers l'espace profil
         router.replace('/(tabs)/profile');
       }
     } catch (err: any) {
-      console.error(err);
-      const message = err.response?.data?.message || err.response?.data?.errors?.email?.[0] || 'Identifiants incorrects.';
+      console.error('Login error:', err);
+      // Extraction des messages de validation précis depuis Laravel
+      const errors = err.response?.data?.errors;
+      let message = err.response?.data?.message || 'Identifiants incorrects.';
+      if (errors) {
+        message = Object.values(errors).flat().join('\n');
+      }
       Alert.alert('Échec de connexion', message);
     } finally {
       setLoading(false);

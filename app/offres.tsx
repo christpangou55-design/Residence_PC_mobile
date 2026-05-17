@@ -12,15 +12,15 @@ export default function OffresScreen() {
           headerTitle: 'Offres Spéciales',
           headerTitleStyle: { fontWeight: '900', fontSize: 18 },
           headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerTintColor: '#0056A4',
+          headerBackVisible: false,
+          headerTintColor: '#0001bc',
         }} 
       />
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <View className="px-6 py-4">
             <Text className="text-3xl font-black tracking-tighter text-slate-900 mb-2">Promotions de Saison</Text>
             <View className="flex-row items-center mb-8">
-                <Sparkles size={14} color="#0056A4" />
+                <Sparkles size={14} color="#0001bc" />
                 <Text className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] ml-2">Mise à jour quotidiennement</Text>
             </View>
 
@@ -66,7 +66,7 @@ function OfferLarge({ title, subtitle, image, tag }: any) {
             <ImageBackground source={{ uri: image }} className="w-full h-full">
                 <View className="absolute inset-0 bg-black/30 p-8 justify-between">
                     <View className="bg-white self-start px-4 py-2 rounded-2xl flex-row items-center">
-                        <Tag size={12} color="#0056A4" />
+                        <Tag size={12} color="#0001bc" />
                         <Text className="text-primary text-[10px] font-black uppercase tracking-widest ml-2">{tag}</Text>
                     </View>
                     <View>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity, ActivityIndicator, SafeAreaView, RefreshControl } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, ActivityIndicator, RefreshControl } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import api, { BASE_URL } from '@/api/api';
 import { ChevronRight, Briefcase, Calendar, MapPin, Star } from 'lucide-react-native';
 
@@ -106,7 +107,7 @@ export default function ReservationsScreen() {
           </View>
 
           <View className="flex-row items-center bg-slate-50 p-4 rounded-2xl mb-6">
-            <Calendar size={16} color="#0056A4" />
+            <Calendar size={16} color="#0001bc" />
             <View className="flex-row items-center ml-3">
               <Text className="text-xs font-black text-slate-900 uppercase tracking-tighter">{formatDate(item.date_arrivee)}</Text>
               <View className="w-4 h-px bg-slate-200 mx-3" />
@@ -126,7 +127,7 @@ export default function ReservationsScreen() {
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator color="#0056A4" />
+        <ActivityIndicator color="#0001bc" />
       </View>
     );
   }
@@ -157,7 +158,7 @@ export default function ReservationsScreen() {
           contentContainerStyle={{ paddingBottom: 40, paddingTop: 10 }}
           showsVerticalScrollIndicator={false}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#0056A4" />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#0001bc" />
           }
         />
       )}

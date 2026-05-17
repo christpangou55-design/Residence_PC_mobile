@@ -14,12 +14,22 @@ interface Logement {
   equipements?: any;
 }
 
+/**
+ * Écran Détails du Logement (Mobile).
+ * Permet de consulter les informations, les photos et de réserver un séjour.
+ */
 export default function LogementDetails() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
+  
+  // État du logement et chargement
   const [logement, setLogement] = useState<Logement | null>(null);
   const [loading, setLoading] = useState(true);
+  
+  // États pour la planification du séjour (dates et nombre de personnes)
   const [dates, setDates] = useState({ date_arrivee: '', date_depart: '', nb_personnes: '1' });
+  
+  // Résultat de la vérification de disponibilité
   const [checkResult, setCheckResult] = useState<any>(null);
   const [booking, setBooking] = useState(false);
 
@@ -27,6 +37,9 @@ export default function LogementDetails() {
     fetchLogement();
   }, [id]);
 
+  /**
+   * Récupère les détails complets du logement via l'API.
+   */
   const fetchLogement = async () => {
     try {
       const res = await api.get(`/logements/${id}`);
@@ -38,6 +51,9 @@ export default function LogementDetails() {
     }
   };
 
+  /**
+   * Vérifie si le logement est libre pour les dates saisies.
+   */
   const handleCheckAvailability = async () => {
     if (!dates.date_arrivee || !dates.date_depart) {
       Alert.alert('Erreur', 'Veuillez remplir les dates.');
@@ -54,14 +70,23 @@ export default function LogementDetails() {
         Alert.alert('Indisponible', 'Ces dates ne sont pas disponibles.');
       }
     } catch (err: any) {
-      console.error(err);
-      const message = err.response?.data?.message || 'Impossible de vérifier la disponibilité.';
+      console.error('Check availability error:', err);
+      // Extraction des erreurs de validation Laravel
+      const errors = err.response?.data?.errors;
+      let message = err.response?.data?.message || 'Impossible de vérifier la disponibilité.';
+      if (errors) {
+        message = Object.values(errors).flat().join('\n');
+      }
       Alert.alert('Erreur', message);
     } finally {
       setLoading(false);
     }
   };
 
+  /**
+   * Lance le processus de réservation. 
+   * Si Stripe est configuré, renvoie vers l'URL de paiement.
+   */
   const handleReservation = async () => {
     setBooking(true);
     try {
@@ -71,14 +96,22 @@ export default function LogementDetails() {
         date_depart: dates.date_depart,
         nb_personnes: parseInt(dates.nb_personnes, 10) || 1,
       });
+      
+      // Si une URL de paiement Stripe est présente, redirection (ou info)
       if (res.data.url) {
-        Alert.alert('Redirection', 'Vous allez être redirigé vers le paiement.');
+        Alert.alert('Paiement', 'Redirection vers la passerelle de paiement sécurisée.');
+        // Ici, on pourrait ouvrir l'URL dans un navigateur avec Linking.openURL(res.data.url)
       } else {
         Alert.alert('Succès', 'Réservation effectuée avec succès !');
         router.push('/(tabs)/reservations');
       }
     } catch (err: any) {
-      const message = err.response?.data?.message || 'Erreur lors de la réservation.';
+      console.error('Reservation error:', err);
+      const errors = err.response?.data?.errors;
+      let message = err.response?.data?.message || 'Erreur lors de la réservation.';
+      if (errors) {
+        message = Object.values(errors).flat().join('\n');
+      }
       Alert.alert('Erreur', message);
     } finally {
       setBooking(false);
@@ -88,7 +121,7 @@ export default function LogementDetails() {
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator color="#0056A4" />
+        <ActivityIndicator color="#0001bc" />
       </View>
     );
   }
@@ -140,18 +173,18 @@ export default function LogementDetails() {
             </View>
             <Text className="text-4xl font-black text-slate-900 tracking-tighter leading-none">{logement.titre}</Text>
             <View className="flex-row items-center mt-4">
-                <MapPin size={14} color="#0056A4" />
+                <MapPin size={14} color="#0001bc" />
                 <Text className="text-sm font-bold text-slate-400 ml-2">Côte d'Azur, France</Text>
             </View>
           </View>
 
           {/* Quick Stats Grid */}
           <View className="flex-row bg-slate-50 p-6 rounded-[30px] border border-slate-100 mb-10">
-            <StatItem icon={<User size={18} color="#0056A4" />} value={logement.capacite} label="Voyageurs" />
+            <StatItem icon={<User size={18} color="#0001bc" />} value={logement.capacite} label="Voyageurs" />
             <View className="w-px h-10 bg-slate-200 mx-4" />
-            <StatItem icon={<ShieldCheck size={18} color="#0056A4" />} value="Vérifié" label="Statut PC" />
+            <StatItem icon={<ShieldCheck size={18} color="#0001bc" />} value="Vérifié" label="Statut PC" />
             <View className="w-px h-10 bg-slate-200 mx-4" />
-            <StatItem icon={<Star size={18} color="#0056A4" />} value="Elite" label="Catégorie" />
+            <StatItem icon={<Star size={18} color="#0001bc" />} value="Elite" label="Catégorie" />
           </View>
 
           {/* Host Info */}
@@ -166,7 +199,7 @@ export default function LogementDetails() {
                 </View>
             </View>
             <TouchableOpacity className="bg-slate-50 p-3 rounded-xl">
-                <MessageCircle size={20} color="#0056A4" />
+                <MessageCircle size={20} color="#0001bc" />
             </TouchableOpacity>
           </View>
 

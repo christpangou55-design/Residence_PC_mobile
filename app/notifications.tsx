@@ -22,7 +22,7 @@ export default function NotificationsScreen() {
       message: 'Profitez de -20% sur votre prochaine réservation ce weekend.',
       time: 'Il y a 5 heures',
       type: 'info',
-      icon: <Info size={20} color="#0056A4" />,
+      icon: <Info size={20} color="#0001bc" />,
     },
     {
       id: 3,
@@ -41,8 +41,8 @@ export default function NotificationsScreen() {
           headerTitle: 'Notifications',
           headerTitleStyle: { fontWeight: '900', fontSize: 18 },
           headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerTintColor: '#0056A4',
+          headerBackVisible: false,
+          headerTintColor: '#0001bc',
         }} 
       />
       <ScrollView className="flex-1 px-6 pt-4">

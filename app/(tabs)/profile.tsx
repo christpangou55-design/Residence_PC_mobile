@@ -51,7 +51,7 @@ export default function ProfileScreen() {
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator color="#0056A4" />
+        <ActivityIndicator color="#0001bc" />
       </View>
     );
   }
@@ -67,7 +67,7 @@ export default function ProfileScreen() {
         {!user ? (
           <View className="bg-slate-50 p-10 rounded-[50px] border border-slate-100 items-center justify-center shadow-sm">
             <View className="bg-white p-6 rounded-3xl mb-6 shadow-sm border border-slate-50">
-                <User size={32} color="#0056A4" />
+                <User size={32} color="#0001bc" />
             </View>
             <Text className="text-2xl font-black text-slate-900 tracking-tighter text-center">Accès Réservé</Text>
             <Text className="text-slate-400 mt-3 text-center font-medium leading-relaxed mb-10">Connectez-vous pour accéder à vos services exclusifs et gérer vos séjours.</Text>
@@ -111,25 +111,25 @@ export default function ProfileScreen() {
             <View className="space-y-4 mb-20">
               <ProfileMenuItem 
                 onPress={() => router.push('/settings')} 
-                icon={<Settings size={18} color="#0056A4" />} 
+                icon={<Settings size={18} color="#0001bc" />} 
                 title="Configuration du Compte" 
                 subtitle="Sécurité et préférences"
               />
               <ProfileMenuItem 
                 onPress={() => router.push('/reservations')} 
-                icon={<CreditCard size={18} color="#0056A4" />} 
+                icon={<CreditCard size={18} color="#0001bc" />} 
                 title="Paiements & Factures" 
                 subtitle="Gérer vos modes de paiement"
               />
               <ProfileMenuItem 
                 onPress={() => router.push('/notifications')} 
-                icon={<Bell size={18} color="#0056A4" />} 
+                icon={<Bell size={18} color="#0001bc" />} 
                 title="Alertes & Rappels" 
                 subtitle="Paramètres de notification"
               />
               <ProfileMenuItem 
                 onPress={() => router.push('/help')} 
-                icon={<HelpCircle size={18} color="#0056A4" />} 
+                icon={<HelpCircle size={18} color="#0001bc" />} 
                 title="Centre d'Assistance" 
                 subtitle="Vous aider à chaque étape"
               />

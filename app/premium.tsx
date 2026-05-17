@@ -12,8 +12,8 @@ export default function PremiumScreen() {
           headerTitle: 'Premium PC',
           headerTitleStyle: { fontWeight: '900', fontSize: 18 },
           headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerTintColor: '#0056A4',
+          headerBackVisible: false,
+          headerTintColor: '#0001bc',
         }} 
       />
       <ScrollView className="flex-1">
@@ -36,7 +36,7 @@ export default function PremiumScreen() {
             <View className="bg-white rounded-[40px] p-8 shadow-2xl border border-slate-50">
                 <View className="flex-row items-center mb-8">
                     <View className="bg-primary/5 p-4 rounded-3xl border border-primary/10">
-                        <Gem size={28} color="#0056A4" />
+                        <Gem size={28} color="#0001bc" />
                     </View>
                     <View className="ml-5">
                         <Text className="text-2xl font-black tracking-tighter text-slate-900">Avantages</Text>
@@ -45,17 +45,17 @@ export default function PremiumScreen() {
                 </View>
 
                 <PremiumFeature 
-                    icon={<Shield size={20} color="#0056A4" />} 
+                    icon={<Shield size={20} color="#0001bc" />} 
                     title="Assurance Totale" 
                     desc="Protection complète pour tous vos séjours PC." 
                 />
                 <PremiumFeature 
-                    icon={<Crown size={20} color="#0056A4" />} 
+                    icon={<Crown size={20} color="#0001bc" />} 
                     title="Conciergerie 24/7" 
                     desc="Un assistant dédié pour toutes vos demandes." 
                 />
                 <PremiumFeature 
-                    icon={<Star size={20} color="#0056A4" />} 
+                    icon={<Star size={20} color="#0001bc" />} 
                     title="Accès Prioritaire" 
                     desc="Libérez les nouvelles résidences avant tout le monde." 
                 />

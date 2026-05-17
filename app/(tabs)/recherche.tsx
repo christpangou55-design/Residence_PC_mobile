@@ -65,7 +65,7 @@ export default function RechercheScreen() {
               <Text className="text-4xl font-black tracking-tighter text-slate-900 leading-none">Trouver <Text className="text-primary italic">L'Exception</Text></Text>
             </View>
             <TouchableOpacity className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-              <SlidersHorizontal size={20} color="#0056A4" />
+              <SlidersHorizontal size={20} color="#0001bc" />
             </TouchableOpacity>
           </View>
         </View>
@@ -74,7 +74,7 @@ export default function RechercheScreen() {
         <View className="space-y-6">
           <View className="bg-slate-50 rounded-[30px] p-2 border border-slate-100 shadow-sm">
             <View className="flex-row items-center px-4 py-4">
-              <MapPin size={22} color="#0056A4" />
+              <MapPin size={22} color="#0001bc" />
               <TextInput 
                 placeholder="Quelle est votre destination ?" 
                 className="flex-1 ml-4 text-sm font-black text-slate-900"
@@ -87,14 +87,14 @@ export default function RechercheScreen() {
 
           <View className="flex-row space-x-4">
             <TouchableOpacity className="flex-1 flex-row items-center bg-slate-50 rounded-[25px] p-5 border border-slate-100">
-              <Calendar size={18} color="#0056A4" />
+              <Calendar size={18} color="#0001bc" />
               <View className="ml-3">
                 <Text className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Séjour</Text>
                 <Text className="text-xs font-black text-slate-900 mt-0.5">Ajouter dates</Text>
               </View>
             </TouchableOpacity> 
             <TouchableOpacity className="flex-1 flex-row items-center bg-slate-50 rounded-[25px] p-5 border border-slate-100">
-              <Users size={18} color="#0056A4" />
+              <Users size={18} color="#0001bc" />
               <View className="ml-3">
                 <Text className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Personnes</Text>
                 <Text className="text-xs font-black text-slate-900 mt-0.5">Ajouter</Text>
@@ -108,7 +108,7 @@ export default function RechercheScreen() {
           <View className="flex-row items-center mb-8 justify-between">
             <View className="flex-row items-center">
                 <View className="bg-primary/5 p-2 rounded-lg">
-                    <SearchIcon size={16} color="#0056A4" />
+                    <SearchIcon size={16} color="#0001bc" />
                 </View>
                 <Text className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] ml-3">
                   {searchQuery ? 'Résultats de recherche' : 'Suggestions Privilège'}
@@ -118,7 +118,7 @@ export default function RechercheScreen() {
           </View>
           
           {loading ? (
-            <ActivityIndicator color="#0056A4" />
+            <ActivityIndicator color="#0001bc" />
           ) : (
             <View className="space-y-6">
                 {filtered.map(item => (
@@ -165,13 +165,13 @@ function SearchResultCard({ item, onPress }: { item: any, onPress: () => void })
                     </View>
                 </View>
                 <View className="flex-row items-center mt-2">
-                    <MapPin size={10} color="#0056A4" />
+                    <MapPin size={10} color="#0001bc" />
                     <Text className="text-[10px] font-bold text-slate-400 ml-1.5 uppercase tracking-tighter">France</Text>
                 </View>
                 <View className="flex-row items-center justify-between mt-3">
                     <Text className="text-lg font-black text-primary tracking-tighter">{Math.round(item.prix_nuit)}€<Text className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">/nuit</Text></Text>
                     <View className="bg-primary/10 p-2 rounded-xl">
-                        <ArrowRight size={14} color="#0056A4" />
+                        <ArrowRight size={14} color="#0001bc" />
                     </View>
                 </View>
             </View>

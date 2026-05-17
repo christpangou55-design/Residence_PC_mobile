@@ -15,8 +15,8 @@ export default function PlanningScreen() {
           headerTitle: 'Planning',
           headerTitleStyle: { fontWeight: '900', fontSize: 18 },
           headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerTintColor: '#0056A4',
+          headerBackVisible: false,
+          headerTintColor: '#0001bc',
         }} 
       />
       <ScrollView className="flex-1 px-6 pt-4">
@@ -27,10 +27,10 @@ export default function PlanningScreen() {
             </View>
             <View className="flex-row space-x-2">
                 <TouchableOpacity className="bg-slate-50 p-3 rounded-2xl border border-slate-100">
-                    <ChevronLeft size={20} color="#0056A4" />
+                    <ChevronLeft size={20} color="#0001bc" />
                 </TouchableOpacity>
                 <TouchableOpacity className="bg-slate-50 p-3 rounded-2xl border border-slate-100">
-                    <ChevronRight size={20} color="#0056A4" />
+                    <ChevronRight size={20} color="#0001bc" />
                 </TouchableOpacity>
             </View>
         </View>

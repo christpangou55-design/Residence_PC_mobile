@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator, SafeAreaView, TextInput } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator, SafeAreaView, TextInput, Platform, StatusBar } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Link, useRouter } from 'expo-router';
 import api, { BASE_URL } from '@/api/api';
 import { Calendar, Star, ChevronRight, Search, MapPin, Bell } from 'lucide-react-native';
@@ -12,11 +13,17 @@ interface Logement {
   photos: { chemin: string }[];
 }
 
+/**
+ * Écran d'accueil mobile (Liste des logements).
+ * Affiche la barre de recherche et les résidences disponibles en grille.
+ */
 export default function HomeScreen() {
+  // Liste des logements récupérée de l'API
   const [logements, setLogements] = useState<Logement[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -33,9 +40,13 @@ export default function HomeScreen() {
     fetchLogements();
   }, []);
 
+  /**
+   * Récupère les logements depuis le serveur.
+   */
   const fetchLogements = async () => {
     try {
       const res = await api.get('/logements');
+      // Gestion de la structure de réponse (paginée ou brute)
       const data = res.data.data || res.data || [];
       setLogements(data);
     } catch (err) {
@@ -48,17 +59,20 @@ export default function HomeScreen() {
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center bg-background">
-        <ActivityIndicator size="large" color="#0056A4" />
+        <ActivityIndicator size="large" color="#0001bc" />
         <Text className="mt-4 text-slate-400 font-bold uppercase tracking-widest text-[10px]">Chargement PC...</Text>
       </View>
     );
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
+    <View className="flex-1 bg-white">
+      <ScrollView showsVerticalScrollIndicator={false} className="flex-1" bounces={false}>
         {/* Header & Premium Search */}
-        <View className="bg-primary pt-4 pb-10 px-6 rounded-b-[50px] shadow-2xl overflow-hidden">
+        <View 
+          className="bg-primary pb-10 px-6 rounded-b-[50px] shadow-2xl overflow-hidden"
+          style={{ paddingTop: Math.max(insets.top, 20) + 10 }}
+        >
             {/* Background decorative elements */}
             <View className="absolute -top-20 -right-20 w-64 h-64 bg-white/5 rounded-full" />
             
@@ -95,9 +109,9 @@ export default function HomeScreen() {
 
         {/* Categories / Quick Actions */}
         <View className="flex-row px-6 mt-8 space-x-4">
-            <QuickAction onPress={() => router.push('/proximite')} icon={<MapPin size={18} color="#0056A4" />} label="Proximité" />
-            <QuickAction onPress={() => router.push('/planning')} icon={<Calendar size={18} color="#0056A4" />} label="Planning" />
-            <QuickAction onPress={() => router.push('/premium')} icon={<Star size={18} color="#0056A4" />} label="Premium" />
+            <QuickAction onPress={() => router.push('/proximite')} icon={<MapPin size={18} color="#0001bc" />} label="Proximité" />
+            <QuickAction onPress={() => router.push('/planning')} icon={<Calendar size={18} color="#0001bc" />} label="Planning" />
+            <QuickAction onPress={() => router.push('/premium')} icon={<Star size={18} color="#0001bc" />} label="Premium" />
         </View>
 
         {/* Logements populaires */}
@@ -109,7 +123,7 @@ export default function HomeScreen() {
             </View>
             <TouchableOpacity onPress={() => router.push('/recherche')} className="flex-row items-center">
                 <Text className="text-primary font-bold text-xs mr-1 uppercase tracking-tighter">Tout voir</Text>
-                <ChevronRight size={14} color="#0056A4" />
+                <ChevronRight size={14} color="#00008b" />
             </TouchableOpacity>
           </View>
 
@@ -191,7 +205,7 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 

@@ -12,8 +12,8 @@ export default function ProximiteScreen() {
           headerTitle: 'Autour de moi',
           headerTitleStyle: { fontWeight: '900', fontSize: 18 },
           headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerTintColor: '#0056A4',
+          headerBackVisible: false,
+          headerTintColor: '#0001bc',
         }} 
       />
       <View className="flex-1">
@@ -38,7 +38,7 @@ export default function ProximiteScreen() {
             <View className="flex-row justify-between items-center mb-6">
                 <Text className="text-2xl font-black tracking-tighter text-slate-900">À proximité</Text>
                 <View className="bg-slate-50 px-3 py-1.5 rounded-xl flex-row items-center border border-slate-100">
-                    <Navigation size={12} color="#0056A4" />
+                    <Navigation size={12} color="#0001bc" />
                     <Text className="text-[10px] font-bold ml-1.5 text-slate-900">Rayon 5km</Text>
                 </View>
             </View>
