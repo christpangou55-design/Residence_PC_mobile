@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View, Text, ScrollView, TouchableOpacity, Image,
   ActivityIndicator, Alert, RefreshControl
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useFocusEffect } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
 import {
   Calendar, Clock, CheckCircle, XCircle, AlertCircle,
-  Heart, Star, CreditCard, Bell, MapPin, Trash2, Edit3,
+  Heart, Star, CreditCard, Bell, MapPin, Trash2,
   Home, ChevronRight
 } from 'lucide-react-native';
 import api, { BASE_URL } from '../../api/api';
-import { useAuth } from '../../context/AuthContext';
 
 const TABS = ['Réservations', 'Favoris', 'Mes Avis', 'Paiements'];
 
@@ -22,18 +23,27 @@ const statusConfig: Record<string, { label: string; color: string; bg: string }>
 
 export default function ClientDashboardScreen() {
   const router = useRouter();
-  const { user } = useAuth();
 
-  const [activeTab, setActiveTab]           = useState('Réservations');
-  const [resFilter, setResFilter]           = useState<'avenir'|'passes'|'en_attente'>('avenir');
-  const [reservations, setReservations]     = useState<any[]>([]);
-  const [favoris, setFavoris]               = useState<Record<string, any[]>>({});
-  const [avis, setAvis]                     = useState<any[]>([]);
-  const [notifications, setNotifications]   = useState<any[]>([]);
-  const [loading, setLoading]               = useState(true);
-  const [refreshing, setRefreshing]         = useState(false);
-  const [editingAvis, setEditingAvis]       = useState<number|null>(null);
-  const [editNote, setEditNote]             = useState(5);
+  const [user, setUser]                         = useState<any>(null);
+  const [activeTab, setActiveTab]               = useState('Réservations');
+  const [resFilter, setResFilter]               = useState<'avenir'|'passes'|'en_attente'>('avenir');
+  const [reservations, setReservations]         = useState<any[]>([]);
+  const [favoris, setFavoris]                   = useState<Record<string, any[]>>({});
+  const [avis, setAvis]                         = useState<any[]>([]);
+  const [loading, setLoading]                   = useState(true);
+  const [refreshing, setRefreshing]             = useState(false);
+
+  const loadUser = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('token');
+      if (token) {
+        const res = await api.get('/auth/me');
+        setUser(res.data.user);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -53,7 +63,13 @@ export default function ClientDashboardScreen() {
     }
   };
 
-  useEffect(() => { fetchData(); }, []);
+  useFocusEffect(
+    useCallback(() => {
+      loadUser();
+      fetchData();
+    }, [])
+  );
+
   const onRefresh = () => { setRefreshing(true); fetchData(); };
 
   const today = new Date();
