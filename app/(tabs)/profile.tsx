@@ -133,6 +133,16 @@ export default function ProfileScreen() {
                 title="Centre d'Assistance" 
                 subtitle="Vous aider à chaque étape"
               />
+
+              {user.role === 'vendeur' || user.role === 'admin' ? (
+                <ProfileMenuItem 
+                  onPress={() => router.push('/vendeur/my-logements')} 
+                  icon={<ShieldCheck size={18} color="#0001bc" />} 
+                  title="Espace Vendeur" 
+                  subtitle="Gérer vos annonces et logements"
+                />
+              ) : null}
+
               
               <TouchableOpacity 
                 onPress={handleLogout}

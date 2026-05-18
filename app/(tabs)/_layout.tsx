@@ -2,8 +2,11 @@ import React from 'react';
 import { Tabs, Link } from 'expo-router';
 import { Home, Search, Briefcase, User, Bell } from 'lucide-react-native';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tabs
       screenOptions={{
@@ -29,14 +32,14 @@ export default function TabLayout() {
         tabBarStyle: {
             borderTopWidth: 1,
             borderTopColor: '#f1f5f9',
-            paddingTop: 5,
-            height: 65,
+            paddingTop: 8,
+            paddingBottom: insets.bottom > 0 ? insets.bottom : 8,
+            height: 60 + (insets.bottom > 0 ? insets.bottom : 8),
             backgroundColor: '#ffffff',
         },
         tabBarLabelStyle: {
             fontSize: 10,
             fontWeight: '600',
-            marginBottom: 5,
         }
       }}>
       <Tabs.Screen
