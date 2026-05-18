@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
-import { LogOut, User, ChevronRight, Settings, HelpCircle, ShieldCheck, CreditCard, Bell, LayoutDashboard } from 'lucide-react-native';
+import { LogOut, User, ChevronRight, Settings, HelpCircle, ShieldCheck, CreditCard, Bell } from 'lucide-react-native';
 import api from '@/api/api';
 
 export default function ProfileScreen() {
@@ -143,14 +143,7 @@ export default function ProfileScreen() {
                 />
               ) : null}
 
-              {user.role === 'client' ? (
-                <ProfileMenuItem 
-                  onPress={() => router.push('/client/dashboard')} 
-                  icon={<LayoutDashboard size={18} color="#0001bc" />} 
-                  title="Mon Espace" 
-                  subtitle="Réservations, favoris et avis"
-                />
-              ) : null}
+
 
               
               <TouchableOpacity 
